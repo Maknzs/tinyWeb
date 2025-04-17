@@ -15,7 +15,7 @@ describe("Ranking Algorithm", () => {
     addPageToIndex(
       index,
       "https://www.example.com/dogs",
-      "This is a page about dogs"
+      "This is a page about dogs and learning"
     );
     addPageToIndex(
       index,
@@ -45,6 +45,20 @@ describe("Ranking Algorithm", () => {
     expect(rankedResults[0]).toBe("https://www.example.com/cats-and-dogs");
     expect(rankedResults[1]).toBe("https://www.example.com/cats");
     expect(rankedResults[2]).toBe("https://www.example.com/dogs");
+  });
+  // Test 3: Handle cases with no matches
+  it("should return an empty array if there are no matches", () => {
+    const searchResults = search(index, "birds"); // No search results for 'birds'
+    const rankedResults = rankSearchResults(index, "birds", searchResults);
+    expect(searchResults).toEqual([]); // No matches for 'birds'
+    expect(rankedResults).toEqual([]); // No matches for 'birds'
+  });
+  // Test 4: Handle ties in ranking.
+  it("should handle ties in ranking", () => {
+    const searchResults = search(index, "learning"); // Should return two pages
+    const rankedResults = rankSearchResults(index, "learning", searchResults);
+    // A tie happens in scores so rankSearchResults does not change the order
+    expect(rankedResults).toEqual(searchResults);
   });
   // Add more test cases to cover other ranking factors
 });
