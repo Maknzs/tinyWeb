@@ -10,7 +10,7 @@ function rankSearchResults(index, query, searchResults) {
   // Step 3: Sort list of pages by their score in descending order
   pagesScored.sort((a, b) => b.score - a.score);
   // Step 4: Return the ranked URLs
-  console.log(pagesScored);
+  // console.log(pagesScored);
   return pagesScored.map((page) => page.url);
 }
 // Function to calculate the relevance score for a URL based on the query keywords
